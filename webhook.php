@@ -1,6 +1,6 @@
 <?php
 
-$accessToken =   "EAADUjeEDo2EBAPjbFwgkvP4YkzWeZAJD8ElMyYUX2NnFiNpHNhsjEWL9OpjLtMPAJR2S0H3heoST1ZBOo1XhjHIwVNrxMkWlKJYRtYKvzUidb7NZB0SCvEN1hIar6SViNlvOrSMOtgFFEuXhCm5KdqOVG0UDSIwCLYMzYYZACAIRpWHjifvV";
+$accessToken =   "EAADUjeEDo2EBALnh6iHt5YE9iENO4nPsx2aKMpGVEKk7mY5P6ZBzpodBJ5ZCa4U475PAjQUzYonTtxOS9pbvygZCmZBnjoHXSc0O6bWehqkbGtEdg3mLpeKAqqfReaXatP3bZAYZACAjvhhMjDUHz2rIbOg4EZBZAOgFjzCxJ82D4gIdMHZCMnZAbW";
 
 
 if (isset($_REQUEST['hub_verify_token'] === $hubVerifyToken)) {
