@@ -1,7 +1,7 @@
 <?php
 
 $accessToken =   "EAAC9sf6wUfcBAIODEohtGdUkqqZATpZAjoAaVpbPoV3z7Np2DVrRMEC8Uy8ZBjwPYP9ZBt1Lv5DNjkNSdWJrbdXKKfemjVF1KGw8GRhETnxqb0ZC7Wt4lZAE8dRYb7YL4QEE6MCn8lUdLCxjuAvyT3UC60dT1WDXPKoxZCDjSnMzxPRfgWchG28";
-
+define("FACEBOOK_VALIDATION_TOKEN", "1029384756");
 
 if (isset($_REQUEST['hub_verify_token'] === $hubVerifyToken)) {
   $c = $_REQUEST['hub_challenge'];
