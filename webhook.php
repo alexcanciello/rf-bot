@@ -28,23 +28,39 @@ $response = null;
 
 //set Message
 
-if($messageText == "ciao") {
+if($messageText == "inizia") {
 
-    $answer = "Ciao, come posso aiutarti?";
+    $response = {
+  "recipient":{
+    "id":"<PSID>"
+  },
+  "message":{
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"button",
+        "text":"What do you want to do next?",
+        "buttons":[
+          {
+            "type":"web_url",
+            "url":"https://www.messenger.com",
+            "title":"Visit Messenger"
+          },
+          {
+            ...
+          },
+          {...}
+        ]
+      }
+    }
+  }
+}
+      
 
 }
 
 //send message to facebook bot
 
-"greeting":[
-  {
-    "locale":"default",
-    "text":"Hello!"
-  }, {
-    "locale":"en_US",
-    "text":"Timeless apparel for the masses."
-  }
-]
 
 $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 
