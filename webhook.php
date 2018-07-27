@@ -28,11 +28,11 @@ $response = null;
 
 //set Message
 
-if($messageText == "inizia") {
+if($messageText == "Inizia") {
 
-    $response = {
+    $response = '{
   "recipient":{
-    "id":"<PSID>"
+    "id":"'.$senderId.'"
   },
   "message":{
     "attachment":{
@@ -45,35 +45,69 @@ if($messageText == "inizia") {
             "type":"web_url",
             "url":"https://www.messenger.com",
             "title":"Visit Messenger"
-          },
-          {
-            ...
-          },
-          {...}
+          }
         ]
       }
     }
   }
-}
-      
+}';
+sendRawResponse($response);     
 
 }
 
-//send message to facebook bot
+function sendTextMessage($message) {
+  global $accessToken;
+  global $senderID;
+  $url = "https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken";
+  
+   $jsonData = "{
+    'recipient' :{
+      'id': $senderID
+      },
+      'message': {
+        'text': $message'
+      }
+    }";
 
+$ch = curl_init($url);
 
-$ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
-
-curl_setopt($ch, CURLOPT_POST, 1);
-
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
-
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_Data);
 curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
-if(!empty($input)){
+    curl_exec($ch);
+ 
+  $errors = curl_error($ch);
+  $response = curl_getinfo(&ch, CURLINFO_HTTP_CODE);
 
-$result = curl_exec($ch);
+  var_dump($errors);
+  var_dump($response);
 
+  curl_close($ch);
 }
 
-curl_close($ch);
+
+function sendRawResponse($response){
+  global $accessToken;
+  $url = "https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken";
+  
+$ch = curl_init($url);
+
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_Data);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+    curl_exec($ch);
+ 
+  $errors = curl_error($ch);
+  $response = curl_getinfo(&ch, CURLINFO_HTTP_CODE);
+
+  var_dump($errors);
+  var_dump($response);
+
+  curl_close($ch);
+}
