@@ -2,9 +2,9 @@
 
 // parameters
 
-$hubVerifyToken = 'cloudwaysschool';
+$hubVerifyToken = '1029384756';
 
-$accessToken =   "EAxxxxxxxxxxxqgBAKWAgizvoHnQLZBR7ZxxxxxxxxxxxxxxxxxxxxxxxxxxxxxptYSymSdocFFCp1ink3EHRVMrCSxxxxxxxxxxxxxxxxxxxxwMZApStyA8GbqAxxxxxxxxxxxxxxxxxxxxxxxxxxx9R6QttFVyNS4ZBurwZDZD";
+$accessToken =   "EAADUjeEDo2EBAPjbFwgkvP4YkzWeZAJD8ElMyYUX2NnFiNpHNhsjEWL9OpjLtMPAJR2S0H3heoST1ZBOo1XhjHIwVNrxMkWlKJYRtYKvzUidb7NZB0SCvEN1hIar6SViNlvOrSMOtgFFEuXhCm5KdqOVG0UDSIwCLYMzYYZACAIRpWHjifvV";
 
 // check token at setup
 
@@ -28,9 +28,9 @@ $response = null;
 
 //set Message
 
-if($messageText == "hi") {
+if($messageText == "ciao") {
 
-    $answer = "Hello";
+    $answer = "Ciao, come posso aiutarti?";
 
 }
 
