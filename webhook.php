@@ -36,13 +36,15 @@ if($messageText == "ciao") {
 
 //send message to facebook bot
 
-$response = [
-
-    'recipient' => [ 'id' => $senderId ],
-
-    'message' => [ 'text' => $answer ]
-
-];
+"greeting":[
+  {
+    "locale":"default",
+    "text":"Hello!"
+  }, {
+    "locale":"en_US",
+    "text":"Timeless apparel for the masses."
+  }
+]
 
 $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 
