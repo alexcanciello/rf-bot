@@ -8,31 +8,37 @@ $accessToken =   "EAADUjeEDo2EBAPjbFwgkvP4YkzWeZAJD8ElMyYUX2NnFiNpHNhsjEWL9OpjLt
 
 // check token at setup
 
-if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
-
-  echo $_REQUEST['hub_challenge'];
-
-  exit;
-
+if (isset($_REQUEST['hub_verify_token'] === $hubVerifyToken)) {
+  $c = $_REQUEST['hub_challenge'];
+  $v = $_REQUEST['hub_verify_token']
+  if($v == "1029384756"){
+    echo $c;
+  }
 }
+
 
 // handle bot's anwser
 
-$input = json_decode(file_get_contents('php://input'), true);
+$input = json_decode(file_get_contents('php://input'),true);
 
-$senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
+$userID = $input['entry'][0]['messaging'][0]['sender']['id'];
 
-$messageText = $input['entry'][0]['messaging'][0]['message']['text'];
+$messageArray = $input['entry'][0]['messaging'][0]['message'];
+if(isset($messagingArray['postback'])){
+  if($messagingArray['postback']['payload'] == 'first hand shake'){
+    sendTextMessage("Ciao!");
+    die();
+  }
+}
 
-$response = null;
-
-//set Message
-
-if($messageText == "Inizia") {
-
-    $response = '{
+if(isset($messagingArray['message'])){
+  $sentMessage = $messagingArray['message']['text'];
+  if(isset$messagingArray['message']['is_echo'])){
+    die();
+  }else if($sentMessage == "Inizia"){
+ $response = '{
   "recipient":{
-    "id":"'.$senderId.'"
+    "id":"'.$userID.'"
   },
   "message":{
     "attachment":{
@@ -50,19 +56,22 @@ if($messageText == "Inizia") {
       }
     }
   }
-}';
-sendRawResponse($response);     
-
+  }';
+    sendRawResponse($response);
+ }
 }
+
+
+
 
 function sendTextMessage($message) {
   global $accessToken;
-  global $senderID;
+  global $userID;
   $url = "https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken";
   
    $jsonData = "{
     'recipient' :{
-      'id': $senderID
+      'id': $userID
       },
       'message': {
         'text': $message'
@@ -72,7 +81,7 @@ function sendTextMessage($message) {
 $ch = curl_init($url);
 
 curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_Data);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
 curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -89,14 +98,14 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 }
 
 
-function sendRawResponse($response){
+function sendRawResponse($rawResponse){
   global $accessToken;
   $url = "https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken";
   
 $ch = curl_init($url);
 
 curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_Data);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $rawResponse);
 curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
