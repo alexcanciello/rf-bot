@@ -1,21 +1,15 @@
 <?php
-require_once 'config.php';
-require_once 'FacebookBot.php';
+
 $accessToken =   "EAAC9sf6wUfcBAIODEohtGdUkqqZATpZAjoAaVpbPoV3z7Np2DVrRMEC8Uy8ZBjwPYP9ZBt1Lv5DNjkNSdWJrbdXKKfemjVF1KGw8GRhETnxqb0ZC7Wt4lZAE8dRYb7YL4QEE6MCn8lUdLCxjuAvyT3UC60dT1WDXPKoxZCDjSnMzxPRfgWchG28";
 
-$bot = new FacebookBot(FACEBOOK_VALIDATION_TOKEN, FACEBOOK_PAGE_ACCESS_TOKEN);
-$bot->run();
 
-if (isset($_REQUEST['hub_verify_token'] === $hubVerifyToken)) {
+if (isset($_REQUEST['hub_challenge'])) {
   $c = $_REQUEST['hub_challenge'];
   $v = $_REQUEST['hub_verify_token']
   if($v == "1029384756"){
     echo $c;
   }
 }
-
-
-// handle bot's anwser
 
 $input = json_decode(file_get_contents('php://input'),true);
 
